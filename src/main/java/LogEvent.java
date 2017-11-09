@@ -75,5 +75,10 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
     return null;
   }
 
+  private void initDynamoDbClient() {
+    AmazonDynamoDBClient client = new AmazonDynamoDBClient();
+    client.setRegion(Region.getRegion(REGION));
+    this.dynamoDb = new DynamoDB(client);
+  }
 
 }
