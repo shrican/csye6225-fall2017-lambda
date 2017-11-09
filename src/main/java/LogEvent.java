@@ -67,7 +67,9 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
                               .withCharset("UTF-8").withData(SUBJECT)))
               .withSource(FROM);
       client.sendEmail(emailRequest);
-      System.out.println("Email sent!");
+
+
+        System.out.println("Email sent successfully!");
     } catch (Exception ex) {
       System.out.println("The email was not sent. Error message: "
               + ex.getMessage());
