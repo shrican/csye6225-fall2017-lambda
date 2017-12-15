@@ -99,8 +99,7 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
                               .withBody(new Body()
                                       .withHtml(new Content()
                                               .withCharset("UTF-8").withData(body))
-                                      .withText(new Content()
-                                              .withCharset("UTF-8").withData(textBody)))
+                                      )
                               .withSubject(new Content()
                                       .withCharset("UTF-8").withData(SUBJECT)))
                       .withSource(FROM);
