@@ -20,9 +20,9 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
   private DynamoDB dynamoDb;
   private String DYNAMODB_TABLE_NAME = "csye6225";
   private Regions REGION = Regions.US_EAST_1;
-  static final String FROM = "shrikant@csye6225-fall2017-mudholkars.me";
+  static final String FROM = "noreply@csye6225-fall2017-bhanushaliv.me";
   static final String SUBJECT = "Reset Password Link";
-  static final String HTMLBODY = "<h1>Amazon SES test (AWS SDK for Java)</h1>"
+  static  String HTMLBODY = "<h1>Amazon SES test (AWS SDK for Java)</h1>"
           + "<p>This email was sent with <a href='https://aws.amazon.com/ses/'>"
           + "Amazon SES</a> using the <a href='https://aws.amazon.com/sdk-for-java/'>"
           + "AWS SDK for Java</a>";
@@ -54,13 +54,15 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
     try {
       AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
               .withRegion(Regions.US_EAST_1).build();
+
+     String BODY = HTMLBODY+textBody;
       SendEmailRequest emailRequest = new SendEmailRequest()
               .withDestination(
                       new Destination().withToAddresses(username))
               .withMessage(new Message()
                       .withBody(new Body()
                               .withHtml(new Content()
-                                      .withCharset("UTF-8").withData(HTMLBODY))
+                                      .withCharset("UTF-8").withData(BODY))
                               .withText(new Content()
                                       .withCharset("UTF-8").withData(textBody)))
                       .withSubject(new Content()
