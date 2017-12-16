@@ -51,7 +51,7 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
                           new PutItemSpec().withItem(new Item()
                                   .withString("id", username)
                                   .withString("token", token)
-                                  .withLong("TTL", System.currentTimeMillis() / 1000L + 60)));
+                                  .withLong("TTL", 1200)));
           textBody = "https://csye6225-fall2017.com/reset?email=" + username + "&token=" + token;
           try {
               AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
@@ -79,12 +79,6 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
                       + ex.getMessage());
           }
       } else {
-          this.dynamoDb.getTable(DYNAMODB_TABLE_NAME)
-                  .putItem(
-                          new PutItemSpec().withItem(new Item()
-                                  .withString("id", username)
-                                  .withString("token", token)
-                                  .withInt("TTL", 1800)));
 
           try {
               AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
